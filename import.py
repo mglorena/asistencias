@@ -1,6 +1,8 @@
 from multiprocessing import connection
 from platform import python_branch
 
+from numpy import array
+
 
 def main():
     connectDB()
@@ -8,31 +10,30 @@ def main():
     #print(content)
 
 def insertData(cvs):
-    #mydb = connectDB()
-    
-    import numpy as np
-    #mycursor = mydb.cursor()
-    val = numpy.array() #testetete
+    i =0
+    import array as arr
+    dias = [][]
+    fechas=[][]
     for row in cvs:
-        #sql =" INSERT INTO asistencias.sesiones(apellido,nombre,idestudiante,correo,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16,d17,d18,d19,d21,d22,d23,d24,d25,d26,d27,d28,d29,d30,d31,d32,d33)"
-        #sql += "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-
-        val.append(row[0])
-        
-        #mycursor.execute(sql, val)
-        #mydb.commit()
-        print(val)
-            #print(len(row))
-            #campos = row[0].split(";")
-            #print(campos)
-    
-
-
-
-
-
-
-
+        cols = len(row)
+        #cols = cols - 4 
+        #print("cols:", cols)
+        if(i==0):
+            tit0 = row[0]
+            tit1 = row[1]
+            tit2 = row[2]
+            tit3 = row[3]
+            
+            
+        for j in range (4,cols):
+            #print(j)
+            if(row[j].find("P (2/2)") != -1):
+                dias.append(row[j])
+            elif ( row[j].find("?") == -1):
+                fechas.append(row[j])
+        i+=1
+    print(dias)
+    print(fechas)
 
 
 def connectDB():
@@ -54,7 +55,7 @@ def connectDB():
 def openfile():
     import csv
     print("Abre el archivo de obras.csv\n")
-    with open('/home/lorena/Downloads/asistencias_CT7.csv') as File:  
+    with open('./asistencias_CT7.csv') as File:  
         reader = csv.reader(File)
         insertData(reader)
 main()
