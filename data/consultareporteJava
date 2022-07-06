@@ -1,0 +1,4 @@
+SELECT Apellido,Nombre,Email,Grupos,CantAsistencias,CuestionarioNota,CONCAT(ROUND((CantAsistencias*100)/32),"%") as PorcAsis  FROM asistencias.tblAsistencias
+WHERE CantAsistencias >= 19
+ORDER BY Apellido,Nombre
+;
